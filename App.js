@@ -2,16 +2,32 @@ import { StatusBar } from 'expo-status-bar';
 import React, { useState, useCallback, useEffect } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { GiftedChat } from 'react-native-gifted-chat';
+import db from "./firebase";
 
 export default function App() {
+
   const [messages, setMessages] = useState([]);
+
   const onSend = useCallback((messages = []) => {
+      console.log(messages);
+      db.collection("Chats").doc("myfirstchat").set({ messages: messages });
       setMessages((previousMessages) =>
       GiftedChat.append(previousMessages, messages)
     );
   }, []);
 
   useEffect(() => {
+    db.collection("Chats")
+      .doc("myfirstchat")
+      .get()
+      .then((snapshot) => {
+        console.log(snapshot.id);
+        console.log(snapshot.data());
+        setMessages(snapshot.data().messages);
+      });
+  }, []);
+
+  /*useEffect(() => {
     setMessages([
       {
         _id: 4,
@@ -54,7 +70,7 @@ export default function App() {
         },
       },
     ])
-  }, [])
+  }, [])*/
 
   return (
     <GiftedChat
@@ -66,9 +82,9 @@ export default function App() {
       messages={messages}
       onSend={messages => onSend(messages)}
       user={{
-        _id: 1, //current blue bubble user
+        _id: "1", //current blue bubble user
         avatar: 'https://placeimg.com/140/140/any',
-        name: 'phoenixs',
+        name: 'Phoenix',
       }}
     />
   );
