@@ -1,44 +1,9 @@
-import React from "react";
-import { StyleSheet } from "react-native";
-import { NavigationContainer } from "@react-navigation/native";
-import { createStackNavigator } from "@react-navigation/stack";
-import ChatScreen from "./screens/ChatScreen";
-import HomeScreen from "./screens/HomeScreen";
-
-const Stack = createStackNavigator();
-
-function App() {
-  return (
-    <NavigationContainer>
-      <Stack.Navigator initialRouteName="Home">
-        <Stack.Screen name="Home" component={HomeScreen} />
-        <Stack.Screen name="Chat" component={ChatScreen} />
-      </Stack.Navigator>
-    </NavigationContainer>
-  );
-}
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-  },
-  item: {
-    padding: 10,
-    fontSize: 18,
-    height: 44,
-  },
-});
-
-export default App;
-
-/*App.js
 import React, { useState, useCallback, useEffect } from "react";
 import { GiftedChat } from "react-native-gifted-chat";
 import db from "./firebase";
 import firebase from "firebase/app";
 
-export default function App() {
+export default function ChatScreen({ navigation }) {
   const [messages, setMessages] = useState([]);
 
   useEffect(() => {
@@ -66,6 +31,7 @@ export default function App() {
       GiftedChat.append(previousMessages, messages)
     );
   }, []);
+
   return (
     <GiftedChat
       messages={messages}
@@ -82,4 +48,3 @@ export default function App() {
     />
   );
 }
-*/
