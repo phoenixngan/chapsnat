@@ -1,6 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { FlatList, Text, View, TouchableOpacity, StyleSheet } from "react-native";
-import db from "./firebase";
+import {
+  FlatList,
+  Text,
+  View,
+  TouchableOpacity,
+  StyleSheet,
+} from "react-native";
+import db from "../firebase";
 
 export default function HomeScreen({ navigation }) {
   const [chatList, setChatList] = useState([]);
@@ -20,12 +26,12 @@ export default function HomeScreen({ navigation }) {
   }, []);
 
   return (
-    <View style={styles.container}>
+    <View>
       <FlatList
         data={chatList}
         renderItem={({ item }) => (
           <TouchableOpacity
-            onPress={() => navigation.navigate("Chat")}
+            onPress={() => navigation.navigate("Chat", { chatid: item.id })}
           >
             <Text style={styles.item}>{item.id}</Text>
           </TouchableOpacity>
