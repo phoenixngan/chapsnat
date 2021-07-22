@@ -7,7 +7,7 @@ import {
   StyleSheet,
 } from "react-native";
 import db from "../firebase";
-import firebase from "firebase/app";
+import firebase from "@firebase/app";
 
 export default function HomeScreen({ navigation }) {
   const [chatList, setChatList] = useState([]);

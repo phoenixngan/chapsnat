@@ -12,7 +12,7 @@ import * as React from "react";
 import { useState, useEffect } from "react";
 import Colors from "../constants/Colors";
 import db from "../firebase";
-import firebase from "firebase/app";
+import firebase from "@firebase/app";
 
 const userListDemo = {
   123: "Jenny",
